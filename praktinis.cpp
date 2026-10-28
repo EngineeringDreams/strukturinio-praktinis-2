@@ -121,6 +121,7 @@ int main() {
                 }
                 cout <<endl;
             }
+            break;
         }
         case 3: {
             cout << "iveskite mokinio numeri 1 - 100" <<endl;
@@ -132,7 +133,89 @@ int main() {
                 cout << pazymiai[pasirinkimas2][i] <<" ";
             }
             cout << endl;
+            break;
         }
+        case 4: {
+            int i = pasirinktiMokini(mokiniuKiekis);
+
+            if (i == -1) {
+                continue;
+            }
+
+            cout << "Mokinio " << vardai[i] << " pazymiai:" << endl;
+
+            for (int j = 0; j < kiekPazymiu[i]; j++) {
+                cout << j + 1 << ". " << pazymiai[i][j] << endl;
+            }
+
+            cout << "Kuri pazimi noretumet pakeisti? irasykite pazymio numeri.";
+            int numeris = nuskaitytiSkaiciu();
+
+            if (numeris < 1 || numeris > kiekPazymiu[i]) {
+                cout << "Neteisingas pazymio numeris!" << endl;
+                continue;
+            }
+
+            int naujasPazymys;
+
+            do {
+                cout << "Iveskite nauja pazymi (1-10): ";
+                naujasPazymys = nuskaitytiSkaiciu();
+
+                if (naujasPazymys < 1 || naujasPazymys > 10) {
+                    cout << "Pazymys turi buti nuo 1 iki 10!"
+                         << endl;
+                }
+
+            } while (naujasPazymys < 1 || naujasPazymys > 10);
+
+            pazymiai[i][numeris - 1] = naujasPazymys;
+
+            cout << "Pazymys atnaujintas!" << endl;
+          break;
+            
+        }
+        case 5:{
+            cout << "Kurio mokinio vidurki noretumete apskaiciuoti? Irasykite jo numeri" <<endl;
+            int pasirinkimas3;
+            int suma = 0;
+            double vid = 0;
+            pasirinkimas3 = nuskaitytiSkaiciu();
+            pasirinkimas3 = pasirinkimas3 - 1;
+            for(int i=0; i<kiekPazymiu[pasirinkimas3]; i++){
+                suma =suma + pazymiai[pasirinkimas3][i];
+            }
+            vid = suma / kiekPazymiu[pasirinkimas3];
+            cout << "Mokinio " << vardai[pasirinkimas3] <<" vidurkis yra " << vid <<endl;
+            break;
+        }
+        case 6:{
+            int i = pasirinktiMokini(mokiniuKiekis);
+
+            if (i == -1) {
+                continue;
+            }
+
+            cout << "Pasalintas mokinys: " << vardai[i] << endl;
+
+            for (int j = i; j < mokiniuKiekis - 1; j++) {
+                vardai[j] = vardai[j + 1];
+                kiekPazymiu[j] = kiekPazymiu[j + 1];
+
+                for (int k = 0; k < kiekPazymiu[j]; k++) {
+                    pazymiai[j][k] = pazymiai[j + 1][k];
+                }
+            }
+
+            mokiniuKiekis--;
+
+            cout << "Mokinys pasalintas sekmingai!" << endl;
+            break;
+        }
+        case 7:{
+            break;
+        }
+        
     }
           } while (pasirinkimas != 7);
 
